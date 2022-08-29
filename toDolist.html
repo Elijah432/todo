@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+ <style>
+    body{
+        text-align: center;
+        background-color: rgb(197, 194, 194);
+    }
+    div{
+        /* position: absolute;
+        left: 10%; */
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input{
+        background-color: rgb(119, 118, 118);
+    }
+ </style>
+<body >
+    <h3>Todo App</h3>
+    <input type="text" placeholder="Type some text. Then, click add" style="width: 400px;" id="inputBox"> 
+    <button onclick="add()">ADD</button>
+    <div>
+
+            <table border="1" width="66.5%" style="border-collapse: collapse; margin-top:10px;" id="show">
+                <tr >
+                    <th>S/N</th>
+                    <th >DESCRIPTION</th>
+                    <th>ACTION</th>
+                    <th >STATE</th>
+                </tr>
+            </table>
+    </div>
+</body>
+<script>
+    ar=[]
+    
+    // console.log(ar);
+    // pushing my array
+    function add() {
+      let text=document.getElementById('inputBox').value  
+      if (text) {
+      ar.push({description:text, done:false})
+      console.log(ar);
+      }
+      else{
+        alert('Textbox is empty')
+      }
+      inputBox.value=''
+      display()
+    }
+    
+    // Displayin my array on 
+    function display() {
+        show.innerHTML=''
+        show.innerHTML+=`
+        <table border="1" width="66.5%" style="border-collapse: collapse; margin-top:10px;" id="show">
+        <tr>
+            <th>S/N</th>
+            <th>DESCRIPTION</th>
+            <th>ACTION</th>
+            <th>STATE</th>
+            
+        </tr>
+    </table>
+        `
+        for (let index = 0; index < ar.length; index++) {
+            show.innerHTML+=`
+        <tr ${ar[index].done? 'style="background-color: white;"' : 'style="background-color: pink;"'}>
+            <td style="text-align: center;">${index+1}</td>
+            <td style="text-align: center;">${ar[index].description}</td>
+            <td style="text-align: center;"><button id='btn' onclick="done(${index})">${ar[index].done?'undo':'check'}</button></td>
+            <td style="text-align: center;">${ar[index].done? '<i  class="fa-solid fa-check" style="color: green;"></i>' : '<i class="fa-solid fa-xmark" style="color: red;"></i>'}</td>                
+        </tr>
+            `
+        
+        }
+    }
+    
+    function done(index) {
+            
+            ar[index].done? ar[index].done=false: ar[index].done=true
+            display()
+    
+            // if(btn.innerHTML === "CHECK" && document.getElementById('font').className=="fa-solid fa-xmark"){
+            //    btn.innerHTML = "UNDO";
+            //    document.getElementById('font').className = "fa-solid fa-check";
+            //    font.style.color='green'
+            // }
+            // // if(){
+               
+            // // }
+            // else{
+            //      btn.innerHTML= "CHECK";
+            //      document.getElementById('font').className = "fa-solid fa-xmark";
+            //      font.style.color='red'
+            // }
+            
+    }  
+</script>
+</html>
